@@ -25,8 +25,13 @@ public class AuctionTable extends Hashtable<String,Auction> implements Serializa
      * Uses the BigData library to construct an AuctionTable from a remote data source.
      * @param URL String representing the URL fo the remote data source.
      * @return The AuctionTable constructed from the remote data source.
+     *
+     * Preconditions:
+     * URL represents a data source which can be connected to using the BigData library.
+     * The data source has proper syntax.
      * @throws IllegalArgumentException
      *          Thrown if the URL does not represent a valid datasource (can't connect or invalid syntax).
+     *
      */
     public static AuctionTable buildFromURL(String URL) throws IllegalArgumentException{
 
@@ -65,6 +70,8 @@ public class AuctionTable extends Hashtable<String,Auction> implements Serializa
      * Manually posts an auction, and add it into the table.
      * @param auctionID the unique key for this object
      * @param auction The auction to insert into the table with the corresponding auctionID
+     * Postconditions:
+     * The item will be added to the table if all given parameters are correct.
      * @throws IllegalArgumentException
      *          If the given auctionID is already stored in the table.
      */
@@ -89,6 +96,9 @@ public class AuctionTable extends Hashtable<String,Auction> implements Serializa
      *  The value cannot go below 0.
      *
      * @param numHours the number of hours to decrease the timeRemaining value by.
+     * Postconditions:
+     * All Auctions in the table have their timeRemaining timer decreased.
+     * If the original value is less than the decreased value, set the value to 0.
      * @throws IllegalArgumentException
      *          If the given numHours is non positive
      */
@@ -101,6 +111,8 @@ public class AuctionTable extends Hashtable<String,Auction> implements Serializa
 
     /**
      * Iterates over all Auction objects in the table and removes them if they are expired (timeRemaining == 0).
+     * Postconditions:
+     *      Only open Auction remain in the table.
      */
     public void removeExpiredAuctions(){
 

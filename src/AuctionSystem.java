@@ -72,6 +72,9 @@ public class AuctionSystem implements Serializable {
         }
     }
 
+    /**
+     * Initializes the auction table if there was a previous table detected in the project directory
+     */
     public static void initialize(){
 
         AuctionTable auctions;
@@ -90,18 +93,31 @@ public class AuctionSystem implements Serializable {
 
     }
 
+    /**
+     * A boolean that controls the loop of the simulation
+     * @return the boolean that determines if the program is running
+     */
     public static boolean isRunning() {
 
         return running;
 
     }
 
+    /**
+     * Sets the boolean so that you can break out of the while loop
+     * @param running the boolean that changes the status of the simulation
+     */
     public static void setRunning(boolean running) {
 
         AuctionSystem.running = running;
 
     }
 
+    /**
+     * A runner method that handles each of the
+     * @param option an option from the menu
+     * @param scanner the scanner that reads the user's input
+     */
     public static void runner( String option, Scanner scanner){
 
         switch (option.toUpperCase()){
@@ -192,6 +208,18 @@ public class AuctionSystem implements Serializable {
                 System.out.println("Writing Auction Table to file...");
                 save();
                 setRunning(false);
+                break;
+            default:
+                System.out.println("Make sure you are inputting a proper option from the menu");
+                System.out.println("" +
+                        "(D) - Import Data from URL \n" +
+                        "(A) - Create a New Auction \n" +
+                        "(B) - Bid on an Item \n" +
+                        "(I) - Get Info on Auction \n" +
+                        "(P) - Print All Auctions \n" +
+                        "(R) - Remove Expired Auctions \n" +
+                        "(T) - Let Time Pass \n" +
+                        "(Q) - Quit \n");
                 break;
         }
 
